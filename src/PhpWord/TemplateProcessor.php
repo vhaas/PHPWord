@@ -782,6 +782,14 @@ class TemplateProcessor
             $matches
         );
 
+        if(empty($matches)) {
+            preg_match(
+                '/(<\?xml.*)(<w:p\b.*>\${' . $blockname . '}<\/w:.*?p>)(.*)(<w:p\b.*\${\/' . $blockname . '}<\/w:.*?p>)/i',
+                $this->tempDocumentMainPart,
+                $matches
+            );
+        }
+
         if (isset($matches[3])) {
             $this->tempDocumentMainPart = str_replace(
                 $matches[2] . $matches[3] . $matches[4],
